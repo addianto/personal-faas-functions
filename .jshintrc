@@ -1,0 +1,11 @@
+{
+  "esversion": 6,
+  "eqeqeq": true,
+  "strict": true,
+  "mocha": true,
+  "node": true,
+  "globals": {
+    "jest": true,
+    "expect": true
+  }
+}

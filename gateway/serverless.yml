@@ -1,0 +1,35 @@
+---
+service: gateway # NOTE: Don't put the word "google" in here
+
+frameworkVersion: "=1.35.1"
+
+provider:
+  name: google
+  runtime: nodejs8
+  project: addianto
+  credentials: ../keyfile.json
+  memorySize: 128
+  timeout: 30s
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - node_modules/**
+    - ./*.test.js
+    - .gitignore
+    - .git/**
+
+functions:
+  postmark:
+    handler: postmark
+    events:
+      - http: path
+  storePostmark:
+    handler: storePostmark
+    events:
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: projects/addianto/topics/postmark
+          # resource: projects/*/topics/postmark (FAULT: RESOURCE_ERROR)

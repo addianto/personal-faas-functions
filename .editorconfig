@@ -1,0 +1,9 @@
+# EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+
+[*.{js,json,yml}]
+indent_style = space
+indent_size = 2

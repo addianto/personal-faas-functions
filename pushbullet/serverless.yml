@@ -1,0 +1,33 @@
+---
+service: pushbullet # NOTE: Don't put the word "google" in here
+
+frameworkVersion: "=1.35.1"
+
+provider:
+  name: google
+  runtime: nodejs8
+  project: addianto
+  credentials: ../keyfile.json
+  memorySize: 128
+  timeout: 30s
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+    - ./*.test.js
+
+functions:
+  pushPostmark:
+    handler: pushPostmark
+    environment:
+      PUSHBULLET_API_TOKEN: ${file(../.env.yml):PUSHBULLET_API_TOKEN, ""}
+      PUSHBULLET_EMAIL: ${file(../.env.yml):PUSHBULLET_EMAIL, ""}
+    events:
+      - event:
+          eventType: providers/cloud.firestore/eventTypes/document.create
+          resource: projects/addianto/databases/(default)/documents/postmark/{email}

@@ -1,0 +1,15 @@
+{
+  "name": "pushbullet-functions",
+  "version": "0.1.0",
+  "description": "Functions that interact with Pushbullet API",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Daya Adianto",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "serverless-google-cloudfunctions": "*"
+  }
+}
